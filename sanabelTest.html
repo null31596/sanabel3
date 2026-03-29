@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanabel Academy - Certification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-in-out;
+            border: none;
+        }
+
+        /* أنيميشن لظهور الصفحة */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        .title p {
+            font-size: 32px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .img-wrapper {
+            text-align: center;
+            padding: 20px;
+        }
+
+        img {
+            width: 200px;
+            /* تصغير الصورة لتناسب التصميم */
+            height: auto;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        #inputs {
+            padding: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            background: #f9f9f9;
+        }
+
+        #inputs input {
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            width: 250px;
+        }
+
+        #inputs input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        #inputs button {
+            padding: 12px 30px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #inputs button:hover {
+            background: #219150;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        #result {
+            padding: 30px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #info {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border-right: 5px solid var(--accent-color);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+        }
+
+        #info span {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 18px;
+            color: #555;
+        }
+
+        #info p {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* إخفاء النتائج في البداية */
+        #result {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <p>Sanabel Academy</p>
+        </div>
+
+        <div class="img-wrapper">
+            <img src="Gemini_Generated_Image_knnpiknnpiknnpik.png" alt="Logo">
+        </div>
+
+        <div id="inputs">
+            <input type="text" placeholder="اسم المستخدم" id="username">
+            <input type="text" placeholder="رقم البطاقة الوطنية (CIN)" id="CIN">
+            <button id="searsh">بحث</button>
+        </div>
+
+        <div id="result">
+            <div id="info">
+                <span>الاسم الكامل: <p id="name"></p></span>
+                <span>رقم البطاقة: <p id="CIN_info"></p></span>
+                <span>التخصص: <p id="specialization"></p></span>
+                <span>مدة الدراسة: <p id="dure"></p></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let dataUser = [
+            user1={
+               name:'ilyass',
+               CIN:1234
+            },
+            user2={
+               name:'rabie',
+               CIN:4321
+            }
+        ]
+
+        document.getElementById('searsh').addEventListener('click', () => {
+            for (let i = 0; i < dataUser.length; i++) {
+               if(dataUser[i].name === document.getElementById('username').value && dataUser[i].CIN === document.getElementById('CIN').value ){
+                document.getAnimations('name').innerHTML = dataUser[i].name;
+                document.getAnimations('CIN').innerHTML = dataUser[i].CIN;
+               }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
