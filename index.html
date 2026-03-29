@@ -195,33 +195,64 @@
                 <span>الاسم الكامل: <p id="name"></p></span>
                 <span>رقم البطاقة: <p id="CIN_info"></p></span>
                 <span>التخصص: <p id="specialization"></p></span>
-                <span>مدة الدراسة: <p id="dure"></p></span>
+                <span>المده: <p id="dure"></p></span>
+                <span>تاريخ الانضمام: <p id="join"></p></span>
+                <span>تاريخ  التخرج: <p id="end"></p></span>
             </div>
         </div>
     </div>
 
-    <script>
-        let dataUser = [
-            user1={
-               name:'ilyass',
-               CIN:1234
-            },
-            user2={
-               name:'rabie',
-               CIN:4321
-            }
-        ]
+    
+        <script>
+    let dataUser = [
+        {
+           name: 'Ayoub Marnoufi',
+           CIN: 'HH105366',
+           specialization:'Responsable QHSE',
+           dure:'1',
+           dateJoin:'03/15/2025',
+           dateEnd:'15/03/2026' 
+        },
+        
+    ];
 
-        document.getElementById('searsh').addEventListener('click', () => {
-            for (let i = 0; i < dataUser.length; i++) {
-               if(dataUser[i].name === document.getElementById('username').value && dataUser[i].CIN === document.getElementById('CIN').value ){
-                document.getAnimations('name').innerHTML = dataUser[i].name;
-                document.getAnimations('CIN').innerHTML = dataUser[i].CIN;
-               }
-            }
-        })
+    document.getElementById('searsh').addEventListener('click', () => {
+        // جلب القيم من المدخلات
+        let inputName = document.getElementById('username').value;
+        let inputCIN = document.getElementById('CIN').value;
+        
+        let found = false; // متغير للتأكد هل وجدنا المستخدم أم لا
 
-    </script>
+        for (let i = 0; i < dataUser.length; i++) {
+            // المقارنة
+            if (dataUser[i].name === inputName && dataUser[i].CIN === inputCIN) {
+                console.log("تم العثور على: " + dataUser[i].name);
+                
+                // إظهار مربع النتيجة
+                document.getElementById("result").style.display = "block";
+                
+                // تعبئة البيانات (استخدام innerHTML أو textContent)
+                document.getElementById('name').innerText = dataUser[i].name;
+                document.getElementById('CIN_info').innerText = dataUser[i].CIN;
+                 document.getElementById('specialization').innerText = dataUser[i].specialization;
+                document.getElementById('dure').innerText = dataUser[i].dure +' ane';
+                document.getElementById('join').innerText = dataUser[i].dateJoin;
+                document.getElementById('end').innerText = dataUser[i]. dateEnd;
+                
+                found = true;
+                break; // نوقف الحلقة لأننا وجدنا المستخدم
+            }
+        }
+
+        if (!found) {
+            console.log('غير موجود');
+            alert("المستخدم غير موجود، تأكد من البيانات");
+            document.getElementById("result").style.display = "none";
+        }
+    });
+</script>
+
+    
 </body>
 
 </html>
